@@ -3,7 +3,9 @@ import { Unbounded, Manrope } from "next/font/google";
 import "./globals.css";
 import Sidebar from "@/components/Sidebar";
 import TopBar from "@/components/TopBar";
-import CursorGlow from "@/components/CursorGlow";
+import NetworkBackground from "@/components/NetworkBackground";
+import ScrollProgress from "@/components/ScrollProgress";
+import CardSpotlight from "@/components/CardSpotlight";
 
 const unbounded = Unbounded({
   variable: "--font-unbounded",
@@ -29,7 +31,9 @@ export default function RootLayout({
   return (
     <html lang="uz" className={`${unbounded.variable} ${manrope.variable}`}>
       <body>
-        <CursorGlow />
+        <NetworkBackground />
+        <ScrollProgress />
+        <CardSpotlight />
         <Sidebar />
         <div className="lg:pl-64">
           <TopBar />

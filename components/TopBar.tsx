@@ -63,12 +63,20 @@ export default function TopBar() {
             </button>
           </div>
         ) : (
-          <Link
-            href="/login"
-            className="shrink-0 rounded-full bg-team px-5 py-2 text-sm font-semibold text-night transition hover:-translate-y-0.5"
-          >
-            Kirish
-          </Link>
+          <div className="flex shrink-0 items-center gap-2">
+            <Link
+              href="/register"
+              className="hidden rounded-full border border-project/70 px-5 py-2 text-sm font-semibold text-project transition hover:bg-project/10 sm:inline"
+            >
+              Ro’yxatdan o’tish
+            </Link>
+            <Link
+              href="/login"
+              className="rounded-full bg-team px-5 py-2 text-sm font-semibold text-night transition hover:-translate-y-0.5"
+            >
+              Kirish
+            </Link>
+          </div>
         )}
       </div>
     </header>

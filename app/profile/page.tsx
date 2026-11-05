@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
 import { useUser } from "@/lib/useUser";
 import ProfileView from "@/components/ProfileView";
+import PrivateInfo from "@/components/PrivateInfo";
 import { PROFILE_FIELDS } from "@/lib/profiles";
 import type { Profile } from "@/lib/profiles";
 
@@ -65,5 +66,10 @@ export default function ProfilePage() {
     );
   }
 
-  return <ProfileView key={profile.id} profile={profile} isOwn />;
+  return (
+    <>
+      <ProfileView key={profile.id} profile={profile} isOwn />
+      <PrivateInfo userId={profile.id} />
+    </>
+  );
 }

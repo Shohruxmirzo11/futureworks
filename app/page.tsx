@@ -16,6 +16,7 @@ import type { LucideIcon } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { useUser } from "@/lib/useUser";
 import Hero from "@/components/Hero";
+import Stats from "@/components/Stats";
 import ProblemCard, { StatusBadge } from "@/components/ProblemCard";
 import TeamDots from "@/components/TeamDots";
 import { PROBLEM_SELECT, filledOf, timeAgo } from "@/lib/problems";
@@ -175,6 +176,8 @@ export default function Home() {
       )}
 
       <div className="mx-auto max-w-6xl px-5 pb-16">
+        <Stats />
+
         <div className="mt-8 grid grid-cols-2 gap-3 lg:grid-cols-4">
           {actions.map(({ href, label, icon: Icon, color }) => (
             <Link

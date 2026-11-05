@@ -85,10 +85,10 @@ export default function ProfileView({
 
   async function save(e: React.FormEvent) {
     e.preventDefault();
-    const uname = username.trim().toLowerCase();
-    if (!/^[a-z0-9_]{3,20}$/.test(uname)) {
+    const uname = username.trim();
+    if (!/^[A-Za-z0-9_]{3,20}$/.test(uname)) {
       setMessage(
-        "Username 3 dan 20 gacha belgi bo’lsin: kichik lotin harflari, raqamlar va pastki chiziq (_)."
+        "Username 3 dan 20 gacha belgi bo’lsin: lotin harflari, raqamlar va pastki chiziq (_)."
       );
       return;
     }

@@ -51,9 +51,20 @@ body::before {
 /* shisha (glass) panel: nozik yorug' chegara */
 @layer components {
   .glass {
+    --mx: 50%;
+    --my: 50%;
     background: linear-gradient(180deg, rgba(14, 22, 48, 0.78), rgba(10, 16, 36, 0.68));
     border: 1px solid rgba(139, 53, 255, 0.22);
     backdrop-filter: blur(14px);
+  }
+
+  /* sichqoncha ustida yurganda karta ichida yorug'lik ergashadi */
+  @media (hover: hover) {
+    .glass:hover {
+      background:
+        radial-gradient(380px circle at var(--mx) var(--my), rgba(139, 53, 255, 0.22), transparent 60%),
+        linear-gradient(180deg, rgba(14, 22, 48, 0.78), rgba(10, 16, 36, 0.68));
+    }
   }
 }
 
