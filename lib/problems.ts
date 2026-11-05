@@ -1,5 +1,6 @@
 export type Problem = {
   id: number;
+  author_id: string;
   title: string;
   description: string;
   category: string;
@@ -13,7 +14,7 @@ export type Problem = {
 
 // "profiles!author_id" muallifni aniq tanlaydi (team_members orqali ikkinchi yo'l ham bor)
 export const PROBLEM_SELECT =
-  "id,title,description,category,skills,team_size,status,created_at,profiles!author_id(username),team_members(count)";
+  "id,author_id,title,description,category,skills,team_size,status,created_at,profiles!author_id(username),team_members(count)";
 
 export const categories = [
   "Texnologiya",

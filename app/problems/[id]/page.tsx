@@ -8,11 +8,13 @@ import { supabase } from "@/lib/supabase";
 import { useUser } from "@/lib/useUser";
 import TeamDots from "@/components/TeamDots";
 import { StatusBadge } from "@/components/ProblemCard";
+import { statuses } from "@/lib/problems";
 
 type Member = { user_id: string; profiles: { username: string } | null };
 
 type Problem = {
   id: number;
+  author_id: string;
   title: string;
   description: string;
   category: string;
@@ -35,7 +37,7 @@ export default function ProblemPage() {
     const { data, error } = await supabase
       .from("problems")
       .select(
-        "id,title,description,category,skills,team_size,status,team_members(user_id,profiles(username))"
+        "id,author_id,title,description,category,skills,team_size,status,team_members(user_id,profiles(username))"
       )
       .eq("id", id)
       .maybeSingle();
@@ -74,6 +76,13 @@ export default function ProblemPage() {
       .eq("problem_id", Number(id))
       .eq("user_id", user.id);
     setBusy(false);
+    if (error) setMessage("Xato: " + error.message);
+    else await load();
+  }
+
+  async function changeStatus(status: string) {
+    setMessage("");
+    const { error } = await supabase.from("problems").update({ status }).eq("id", id);
     if (error) setMessage("Xato: " + error.message);
     else await load();
   }
@@ -149,14 +158,34 @@ export default function ProblemPage() {
 
         <ul className="mt-5 flex flex-wrap gap-2">
           {members.map((m) => (
-            <li
-              key={m.user_id}
-              className="rounded-full border border-line px-3 py-1 text-sm"
-            >
-              {m.profiles?.username ?? "Ishtirokchi"}
+            <li key={m.user_id}>
+              <Link
+                href={`/u/${m.profiles?.username ?? ""}`}
+                className="block rounded-full border border-line px-3 py-1 text-sm transition hover:border-team hover:text-team"
+              >
+                {m.profiles?.username ?? "Ishtirokchi"}
+                {m.user_id === problem.author_id ? " (rahbar)" : ""}
+              </Link>
             </li>
           ))}
         </ul>
+
+        {user?.id === problem.author_id && (
+          <label className="mt-6 block text-sm text-mist">
+            Loyiha holati (faqat rahbar o’zgartiradi)
+            <select
+              className="mt-2 w-full rounded-xl border border-line bg-panel px-4 py-2.5 text-snow outline-none focus:border-team"
+              value={problem.status}
+              onChange={(e) => changeStatus(e.target.value)}
+            >
+              {Object.entries(statuses).map(([key, st]) => (
+                <option key={key} value={key}>
+                  {st.label}
+                </option>
+              ))}
+            </select>
+          </label>
+        )}
 
         <div className="mt-6">
           {isMember ? (
