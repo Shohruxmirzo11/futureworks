@@ -1,26 +1,70 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --night: #050816;
+  --deep: #0a1024;
+  --panel: #0e1630;
+  --line: #222c5a;
+  --snow: #f5f7ff;
+  --mist: #9ba8c7;
+  --problem: #e548ff;
+  --team: #00d5ff;
+  --project: #8b35ff;
+  --showcase: #286bff;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-night: var(--night);
+  --color-deep: var(--deep);
+  --color-panel: var(--panel);
+  --color-line: var(--line);
+  --color-snow: var(--snow);
+  --color-mist: var(--mist);
+  --color-problem: var(--problem);
+  --color-team: var(--team);
+  --color-project: var(--project);
+  --color-showcase: var(--showcase);
+  --font-display: var(--font-unbounded);
+  --font-sans: var(--font-manrope);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--night);
+  color: var(--snow);
+  font-family: var(--font-manrope), system-ui, sans-serif;
+  min-height: 100vh;
+}
+
+/* fondagi sokin yorug'lik dog'lari */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(60rem 40rem at 10% -10%, rgba(139, 53, 255, 0.2), transparent 60%),
+    radial-gradient(50rem 35rem at 100% 0%, rgba(40, 107, 255, 0.14), transparent 60%),
+    radial-gradient(45rem 30rem at 50% 115%, rgba(0, 213, 255, 0.08), transparent 60%);
+}
+
+/* shisha (glass) panel: nozik yorug' chegara */
+@layer components {
+  .glass {
+    background: linear-gradient(180deg, rgba(14, 22, 48, 0.78), rgba(10, 16, 36, 0.68));
+    border: 1px solid rgba(139, 53, 255, 0.22);
+    backdrop-filter: blur(14px);
+  }
+}
+
+/* harakatni kamaytirishni so'ragan foydalanuvchilar uchun */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
