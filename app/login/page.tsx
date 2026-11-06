@@ -18,7 +18,6 @@ export default function LoginPage() {
   const [busy, setBusy] = useState(false);
   const [search, setSearch] = useState("");
 
-  // ?next=... ni ro'yxatdan o'tish havolasiga ham uzatamiz
   useEffect(() => {
     setSearch(window.location.search);
   }, []);
@@ -35,7 +34,6 @@ export default function LoginPage() {
     setBusy(true);
     setMessage("");
 
-    // Eski hisoblar uchun: email kiritilsa, to'g'ridan-to'g'ri kiradi
     if (id.includes("@")) {
       const { error } = await supabase.auth.signInWithPassword({ email: id, password });
       setBusy(false);
@@ -44,7 +42,6 @@ export default function LoginPage() {
       return;
     }
 
-    // Asosiy yo'l: nik + parol (email serverda topiladi va hech qachon ko'rsatilmaydi)
     try {
       const res = await fetch("/api/login", {
         method: "POST",

@@ -30,7 +30,6 @@ const countOf = (table: string) =>
     .select("*", { count: "exact", head: true })
     .then(({ count }) => count ?? 0);
 
-// Platforma raqamlarda: haqiqiy ma'lumotdan hisoblanadi
 export default function Stats() {
   const [counts, setCounts] = useState<number[] | null>(null);
 
@@ -43,7 +42,7 @@ export default function Stats() {
   const items = [
     { label: "E’lon qilingan muammolar", color: "#e548ff" },
     { label: "Ro’yxatdan o’tgan odamlar", color: "#00d5ff" },
-    { label: "Jamoalardagi o’rinlar", color: "#8b35ff" },
+    { label: "Jamoa a'zoliklari", color: "#8b35ff" },
   ];
 
   if (!counts) return null;

@@ -2,14 +2,14 @@
 
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
 import { useUser } from "@/lib/useUser";
 import ProfileView from "@/components/ProfileView";
 import { PROFILE_FIELDS } from "@/lib/profiles";
 import type { Profile } from "@/lib/profiles";
 
-export default function PublicProfilePage() {
+function PublicProfileView() {
   const { username } = useParams<{ username: string }>();
   const { user } = useUser();
   const [profile, setProfile] = useState<Profile | null>(null);
@@ -52,5 +52,19 @@ export default function PublicProfilePage() {
       profile={profile}
       isOwn={user?.id === profile.id}
     />
+  );
+}
+
+export default function PublicProfilePage() {
+  return (
+    <Suspense
+      fallback={
+        <main className="mx-auto max-w-5xl px-5 py-10">
+          <div className="h-48 animate-pulse rounded-2xl bg-panel/60" />
+        </main>
+      }
+    >
+      <PublicProfileView />
+    </Suspense>
   );
 }

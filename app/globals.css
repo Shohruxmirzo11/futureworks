@@ -35,7 +35,6 @@ body {
   min-height: 100vh;
 }
 
-/* fondagi sokin yorug'lik dog'lari */
 body::before {
   content: "";
   position: fixed;
@@ -48,7 +47,6 @@ body::before {
     radial-gradient(45rem 30rem at 50% 115%, rgba(0, 213, 255, 0.08), transparent 60%);
 }
 
-/* shisha (glass) panel: nozik yorug' chegara */
 @layer components {
   .glass {
     --mx: 50%;
@@ -58,7 +56,6 @@ body::before {
     backdrop-filter: blur(14px);
   }
 
-  /* sichqoncha ustida yurganda karta ichida yorug'lik ergashadi */
   @media (hover: hover) {
     .glass:hover {
       background:
@@ -68,7 +65,6 @@ body::before {
   }
 }
 
-/* harakatni kamaytirishni so'ragan foydalanuvchilar uchun */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
+import { Suspense, useCallback, useEffect, useState } from "react";
 import { motion } from "motion/react";
 import { supabase } from "@/lib/supabase";
 import { useUser } from "@/lib/useUser";
@@ -24,7 +24,7 @@ type Problem = {
   team_members: Member[];
 };
 
-export default function ProblemPage() {
+function ProblemView() {
   const { id } = useParams<{ id: string }>();
   const router = useRouter();
   const { user } = useUser();
@@ -216,5 +216,19 @@ export default function ProblemPage() {
         </div>
       </motion.section>
     </main>
+  );
+}
+
+export default function ProblemPage() {
+  return (
+    <Suspense
+      fallback={
+        <main className="mx-auto max-w-3xl px-5 py-16">
+          <div className="h-40 animate-pulse rounded-2xl bg-panel/60" />
+        </main>
+      }
+    >
+      <ProblemView />
+    </Suspense>
   );
 }

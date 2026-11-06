@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import { Unbounded, Manrope } from "next/font/google";
 import "./globals.css";
@@ -34,7 +35,9 @@ export default function RootLayout({
         <NetworkBackground />
         <ScrollProgress />
         <CardSpotlight />
-        <Sidebar />
+        <Suspense fallback={null}>
+          <Sidebar />
+        </Suspense>
         <div className="lg:pl-64">
           <TopBar />
           <div className="pb-24 lg:pb-0">{children}</div>
